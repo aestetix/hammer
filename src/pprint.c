@@ -102,7 +102,7 @@ static inline void append_buf_c(struct result_buf *buf, char v) {
 }
 
 static void unamb_sub(const HParsedToken* tok, struct result_buf *buf) {
-  char* tmpbuf;
+  char* tmpbuf = 0;
   int len;
   if (!tok) {
     append_buf(buf, "NULL", 4);
@@ -128,14 +128,14 @@ static void unamb_sub(const HParsedToken* tok, struct result_buf *buf) {
     break;
   case TT_SINT:
     if (tok->sint < 0)
-      len = asprintf(&tmpbuf, "s-%#" PRIx64, -tok->sint);
+      len = snprintf(tmpbuf, 0, "s-%#" PRIx64, -tok->sint);
     else
-      len = asprintf(&tmpbuf, "s%#" PRIx64, tok->sint);
+      len = snprintf(tmpbuf, 0, "s%#" PRIx64, tok->sint);
     append_buf(buf, tmpbuf, len);
     free(tmpbuf);
     break;
   case TT_UINT:
-    len = asprintf(&tmpbuf, "u%#" PRIx64, tok->uint);
+    len = sprintf(tmpbuf, 0, "u%#" PRIx64, tok->uint);
     append_buf(buf, tmpbuf, len);
     free(tmpbuf);
     break;

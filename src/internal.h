@@ -24,7 +24,6 @@
 #define HAMMER_INTERNAL__H
 #include <stdint.h>
 #include <assert.h>
-#include <err.h>
 #include <string.h>
 #include "hammer.h"
 
@@ -33,8 +32,8 @@
 #else
 #define assert_message(check, message) do {				\
     if (!(check))							\
-      errx(1, "Assertion failed (programmer error): %s", message);	\
-  } while(0)
+       fprintf(stderr, "Assertion failed (programmer error): %s", message); \
+  } while(0) 
 #endif
 
 #define HAMMER_FN_IMPL_NOARGS(rtype_t, name) \

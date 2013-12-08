@@ -15,11 +15,12 @@ char* getsym(void* addr) {
   if (dladdr(addr, &dli) != 0 && dli.dli_sname != NULL) {
     if (dli.dli_saddr == addr)
       return strdup(dli.dli_sname);
-    else if (asprintf(&retstr, "%s+0x%lx", dli.dli_sname, addr - dli.dli_saddr) > 0)
+    else if (vsprintf(&retstr, "%s+0x%lx", dli.dli_sname, addr - dli.dli_saddr) > 0)
       return retstr;
   } else
 #endif
-    if (asprintf(&retstr, "%p", addr) > 0)
+    if (snprintf(NULL, 0, "%p", addr) > 0)
+//    if (snprintf(&retstr, "%p", addr) > 0)
       return retstr;
     else
       return NULL;

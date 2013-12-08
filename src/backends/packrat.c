@@ -102,7 +102,8 @@ HParseResult* grow(HParserCacheKey *k, HParseState *state, HRecursionHead *head)
   h_hashtable_put(state->recursion_heads, k, head);
   HParserCacheValue *old_cached = h_hashtable_get(state->cache, k);
   if (!old_cached || PC_LEFT == old_cached->value_type)
-    errx(1, "impossible match");
+    fprintf(stderr, "Impossible match");
+//    errx(1, "impossible match");
   HParseResult *old_res = old_cached->right->result;
   
   // reset the eval_set of the head of the recursion at each beginning of growth
@@ -123,7 +124,9 @@ HParseResult* grow(HParserCacheKey *k, HParseState *state, HRecursionHead *head)
       if (cached && PC_RIGHT == cached->value_type) {
 	return cached->right->result;
       } else {
-	errx(1, "impossible match");
+        fprintf(stderr, "impossible match");
+	return NULL;
+//	errx(1, "impossible match");
       }
     }
   } else {
@@ -149,7 +152,9 @@ HParseResult* lr_answer(HParserCacheKey *k, HParseState *state, HLeftRec *growab
 	return grow(k, state, growable->head);
     }
   } else {
-    errx(1, "lrAnswer with no head");
+    fprintf(stderr, "lrAnswer with no head");
+    return NULL;
+//    errx(1, "lrAnswer with no head");
   }
 }
 
