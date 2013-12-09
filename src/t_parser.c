@@ -1,9 +1,11 @@
 #include <glib.h>
 #include <string.h>
+#include <stdio.h>
 #include "hammer.h"
 #include "internal.h"
 #include "test_suite.h"
 #include "parsers/parser_internal.h"
+#define __USE_MINGW_ANSI_STDIO 1
 
 static void test_token(gconstpointer backend) {
   const HParser *token_ = h_token((const uint8_t*)"95\xa2", 3);

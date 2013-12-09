@@ -8,7 +8,7 @@
 // This is some spectacularly non-portable code... but whee!
 #include <dlfcn.h>
 char* getsym(void* addr) {
-  char* retstr;
+  char* retstr = NULL;
 #if 0
   // This will be fixed later.
   Dl_info dli;
@@ -19,8 +19,8 @@ char* getsym(void* addr) {
       return retstr;
   } else
 #endif
-    if (snprintf(NULL, 0, "%p", addr) > 0)
-//    if (snprintf(&retstr, "%p", addr) > 0)
+    int sz = snprintf(retstr, 0, "%p", addr);
+    if (snprintf(retstr, sz, "%p", addr) > 0)
       return retstr;
     else
       return NULL;

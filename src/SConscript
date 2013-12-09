@@ -82,7 +82,7 @@ testenv = env.Clone()
 testenv.ParseConfig('pkg-config --cflags --libs glib-2.0')
 testenv.Append(LIBS=['hammer'], LIBPATH=['.'])
 ctestexec = testenv.Program('test_suite', ctests + ['test_suite.c'])
-ctest = Alias('testc', [ctestexec], "".join(["env LD_LIBRARY_PATH=", os.path.dirname(ctestexec[0].path), " ", ctestexec[0].path]))
+ctest = Alias('testc', [ctestexec], "".join(["set LD_LIBRARY_PATH=", os.path.dirname(ctestexec[0].path), " ", ctestexec[0].path]))
 AlwaysBuild(ctest)
 testruns.append(ctest)
 

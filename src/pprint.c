@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+
 typedef struct pp_state {
   int delta;
   int indent_amt;
@@ -135,7 +136,7 @@ static void unamb_sub(const HParsedToken* tok, struct result_buf *buf) {
     free(tmpbuf);
     break;
   case TT_UINT:
-    len = sprintf(tmpbuf, 0, "u%#" PRIx64, tok->uint);
+    len = snprintf(tmpbuf, 0, "u%#" PRIx64, tok->uint);
     append_buf(buf, tmpbuf, len);
     free(tmpbuf);
     break;
