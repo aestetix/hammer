@@ -23,6 +23,28 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+#ifdef __WIN32
+#include <stdarg.h>
+int vasprintf( char **sptr, char *fmt, va_list argv )
+{
+    int wanted = vsnprintf( *sptr = NULL, 0, fmt, argv );
+    if( (wanted > 0) && ((*sptr = malloc( 1 + wanted )) != NULL) )
+        return vsprintf( *sptr, fmt, argv );
+
+    return wanted;
+}
+
+int asprintf( char **sptr, char *fmt, ... )
+{
+    int retval;
+    va_list argv;
+    va_start( argv, fmt );
+    retval = vasprintf( sptr, fmt, argv );
+    va_end( argv );
+    return retval;
+}
+#endif
+
 
 typedef struct pp_state {
   int delta;
@@ -129,14 +151,14 @@ static void unamb_sub(const HParsedToken* tok, struct result_buf *buf) {
     break;
   case TT_SINT:
     if (tok->sint < 0)
-      len = snprintf(tmpbuf, 0, "s-%#" PRIx64, -tok->sint);
+      len = asprintf(&tmpbuf, "s-%#" PRIx64, -tok->sint);
     else
-      len = snprintf(tmpbuf, 0, "s%#" PRIx64, tok->sint);
+      len = asprintf(&tmpbuf, "s%#" PRIx64, tok->sint);
     append_buf(buf, tmpbuf, len);
     free(tmpbuf);
     break;
   case TT_UINT:
-    len = snprintf(tmpbuf, 0, "u%#" PRIx64, tok->uint);
+    len = asprintf(&tmpbuf, "u%#" PRIx64, tok->uint);
     append_buf(buf, tmpbuf, len);
     free(tmpbuf);
     break;

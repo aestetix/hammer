@@ -40,7 +40,7 @@ env.ScanReplace('libhammer.pc.in')
 env.MergeFlags("-std=gnu99 -Wall -Wextra -Werror -Wno-unused-parameter -Wno-attributes")
 
 if env['PLATFORM'] == 'win32':
-    env.MergeFlags("-D__USE_MINGW_ANSI_STDIO=1 -DC99_WAS_YEARS_AGO_YAKNOW")
+    env.MergeFlags("-D__USE_MINGW_ANSI_STDIO=1 -DC99_WAS_YEARS_AGO_YAKNOW -D__WIN32")
 
 elif env['PLATFORM'] == 'darwin':
     env.Append(SHLINKFLAGS = '-install_name ' + env["libpath"] + '/${TARGET.file}')
