@@ -62,6 +62,14 @@ The `examples/` directory contains some simple examples, currently including:
 * base64
 * DNS
 
+Installing on Windows
+=====================
+
+I will need to go back and document the process from scratch, as I'm sure I'm missing something, but this guide was immensely helpful:
+http://www.mingw.org/wiki/Bootstrapping_GLIB_with_MinGW
+
+There are probably a few places you need to copy DLL files or ensure paths are there, I'll look and update that in a bit.
+
 Known Issues
 ============
 The Python bindings only work with Python 2.7. SCons doesn't work with Python 3, and PyCapsule isn't available in 2.6 and below, so 2.7 is all you get. Sorry about that.
