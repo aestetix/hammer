@@ -64,11 +64,23 @@ The `examples/` directory contains some simple examples, currently including:
 
 Installing on Windows
 =====================
+Draft of Windows documentation for setting up a dev environment:
 
-I will need to go back and document the process from scratch, as I'm sure I'm missing something, but this guide was immensely helpful:
-http://www.mingw.org/wiki/Bootstrapping_GLIB_with_MinGW
+Install MinGW. Once installed, run the GUI program, and install mingw32-base and mingw32 developer toolkit.
+It's probably a good idea to create a shortcut on the Desktop to "C:\MinGW\msys\1.0\msys.bat", which spawns a MinGW shell.
 
-There are probably a few places you need to copy DLL files or ensure paths are there, I'll look and update that in a bit.
+Next, install git and python 2.6. Add "C:\Python26" and "C:\MinGW\bin" to the PATH environment variable, and run the [insert link] python registry script to make sure it's in the registry.
+
+Download the scons 2.3.0 installer. If it gives a "cannot find python" error, just decompress the exe with 7zip and copy the files in the SCRIPTS directory to C:\MinGW\msys\1.0\home\$username
+
+Next, download the 32-bit windows binaries for pkg-config and glib, open the zips and copy the DLLs to C:\MinGW\bin.
+
+Next, download glib dev and (32 bit) and copy the files to the revalent directories in C:\MinGW (bin to bin, include to include, etc).
+
+Finally, download http://code.google.com/p/dlfcn-win32/. Decompress and copy the dlfcn.h file into C:\MinGW\include.
+
+Once you get all that stuff together, go into the msys shell, and clone the hammer git repo. Then run "python ../scons.py" to build the code. Run "python ../scons.py test" to build the test_suite.exe.
+
 
 Known Issues
 ============
