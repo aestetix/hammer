@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int asprintf( char **sptr, char *fmt, ... );
+//int asprintf( char **sptr, char *fmt, ... );
 
 // This is some spectacularly non-portable code... but whee!
 #include <dlfcn.h>
@@ -20,10 +20,12 @@ char* getsym(void* addr) {
   } else
 #endif
     //int sz = snprintf(retstr, 0, "%p", addr);
-    if (asprintf(&retstr, "%p", addr) > 0)
-      return retstr;
-    else
-      return NULL;
+	snprintf(retstr, 0, "%p", addr);
+	    return retstr;
+    //if (asprintf(&retstr, "%p", addr) > 0)
+    //  return retstr;
+    //else
+    //  return NULL;
 }
 
 const char* rvm_op_names[RVM_OPCOUNT] = {

@@ -22,9 +22,20 @@
 #else
 #define PRSZ "%z"
 #endif
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <inttypes.h>
+#ifdef WINNT
+// TODO: Fix this to be more specific if/when MS gets their shit together
+#undef PRIi64
+#undef PRIu64
+#define PRIi64 "Ii"
+#define PRIu64 "Iu"
+#else
+#error "WTF"
+#endif
+
 
 // Equivalent to g_assert_*, but not using g_assert...
 #define g_check_inttype(fmt, typ, n1, op, n2) do {				\

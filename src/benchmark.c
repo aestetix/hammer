@@ -14,10 +14,10 @@
 #include <mach/mach.h>
 #endif
 
-struct timespec {
-  long int tv_sec;                /* Seconds.  */
-  long int tv_nsec;        /* Nanoseconds.  */
-};
+//struct timespec {
+//  long int tv_sec;                /* Seconds.  */
+//  long int tv_nsec;        /* Nanoseconds.  */
+//};
 
 
 

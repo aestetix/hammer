@@ -9,7 +9,7 @@ vars.Add(PathVariable('DESTDIR', "Root directory to install in (useful for packa
 vars.Add(PathVariable('prefix', "Where to install in the FHS", "/usr/local", PathVariable.PathAccept))
 vars.Add(ListVariable('bindings', 'Language bindings to build', 'none', ['python', 'perl']))
 
-env = Environment(ENV = {'PATH' : os.environ['PATH']}, variables = vars, tools=['default', 'scanreplace'], toolpath=['tools'])
+env = Environment(ENV = {'PATH' : os.environ['PATH'], 'PKG_CONFIG_PATH': os.environ['PKG_CONFIG_PATH']}, variables = vars, tools=['default', 'scanreplace'], toolpath=['tools'])
 
 if not 'bindings' in env:
     env['bindings'] = []
